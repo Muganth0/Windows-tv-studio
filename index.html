@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; connect-src 'self' https: http:;"
+  />
+  <title>TV Studio</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="app-shell" id="appShell">
+
+    <!-- Top navigation -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">TV</div>
+        <div class="brand-text">
+          <h1>TV Studio</h1>
+          <span>Your entertainment hub</span>
+        </div>
+      </div>
+
+      <div class="player-controls" id="playerControls" hidden>
+        <button class="control-button" id="backBtn" type="button"
+          title="Go back" aria-label="Go back">
+          <span aria-hidden="true">←</span>
+          <span>Back</span>
+        </button>
+
+        <div class="player-status" id="playerStatus">Ready</div>
+
+        <button class="control-button close-button" id="closeInAppBtn"
+          type="button" title="Return home" aria-label="Return home">
+          <span aria-hidden="true">✕</span>
+          <span>Close</span>
+        </button>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-button" id="chatBtn" type="button"
+          title="Open AI chat" aria-label="Open AI chat">🤖</button>
+
+        <button class="icon-button" id="themeBtn" type="button"
+          title="Switch theme" aria-label="Switch theme">◐</button>
+
+        <button class="icon-button" id="fullscreenBtn" type="button"
+          title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>
+      </div>
+    </header>
+
+    <!-- Main home screen -->
+    <main id="homeScreen">
+
+      <!-- Hero, clock and weather -->
+      <section class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">
+            <span class="live-dot"></span>
+            YOUR PERSONAL ENTERTAINMENT SPACE
+          </div>
+
+          <h2>
+            Everything you love.<br />
+            <span>All in one place.</span>
+          </h2>
+
+          <p>
+            Your favourite streaming, music and browsing apps,
+            ready whenever you are.
+          </p>
+
+          <div class="hero-actions">
+            <button class="primary-button" id="browseBtn" type="button">
+              <span aria-hidden="true">▶</span>
+              Explore apps
+            </button>
+
+            <button class="secondary-button" id="helpBtn" type="button">
+              <span aria-hidden="true">ⓘ</span>
+              How to use
+            </button>
+          </div>
+        </div>
+
+        <aside class="info-panel">
+          <!-- Clock -->
+          <div class="clock-card">
+            <div class="info-heading">
+              <span class="info-symbol">◷</span>
+              <span>LOCAL TIME</span>
+            </div>
+
+            <div class="clock" id="clock">--:--</div>
+            <div class="date-label" id="dateLabel">Loading date...</div>
+            <div class="full-date" id="fullDate"></div>
+          </div>
+
+          <!-- Weather -->
+          <div class="weather-card">
+            <div class="weather-top">
+              <div class="info-heading">
+                <span class="info-symbol">☁</span>
+                <span>WEATHER</span>
+              </div>
+
+              <button class="refresh-button" id="refreshWeather"
+                type="button" title="Refresh weather"
+                aria-label="Refresh weather">↻</button>
+            </div>
+
+            <div class="weather-location">
+              <span aria-hidden="true">⌖</span>
+              <span id="locationLabel">Detecting location...</span>
+            </div>
+
+            <div class="weather-main">
+              <div class="weather-icon" id="weatherIcon">☁</div>
+              <div>
+                <div class="temperature" id="temperature">--°</div>
+                <div class="weather-description" id="weatherDescription">
+                  Checking conditions...
+                </div>
+              </div>
+            </div>
+
+            <div class="weather-details">
+              <div>
+                <span class="detail-label">Humidity</span>
+                <strong id="humidity">--</strong>
+              </div>
+              <div>
+                <span class="detail-label">Wind</span>
+                <strong id="windSpeed">--</strong>
+              </div>
+            </div>
+
+            <div class="weather-status" id="weatherStatus">
+              Weather information loads when available.
+            </div>
+            <div class="weather-city" id="weatherCity"></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Exactly 13 selected applications -->
+      <section class="apps-section" id="appsSection">
+        <div class="section-heading">
+          <div>
+            <div class="section-eyebrow">YOUR COLLECTION</div>
+            <h2>Entertainment apps</h2>
+            <p>Choose an app to start watching, listening or browsing.</p>
+          </div>
+
+          <div class="app-count">
+            <span class="app-count-dot"></span>
+            <span>13 APPS</span>
+          </div>
+        </div>
+
+        <div class="app-grid" id="appGrid">
+
+          <button class="app-card netflix"
+            data-app="Netflix"
+            data-url="https://www.netflix.com/"
+            type="button">
+            <span class="app-logo">N</span>
+            <span class="app-name">Netflix</span>
+            <span class="app-category">Movies &amp; series</span>
+          </button>
+
+          <button class="app-card youtube"
+            data-app="YouTube"
+            data-url="https://www.youtube.com/"
+            type="button">
+            <span class="app-logo">▶</span>
+            <span class="app-name">YouTube</span>
+            <span class="app-category">Videos</span>
+          </button>
+
+          <button class="app-card prime"
+            data-app="Prime Video"
+            data-url="https://www.primevideo.com/"
+            type="button">
+            <span class="app-logo">prime</span>
+            <span class="app-name">Prime Video</span>
+            <span class="app-category">Movies &amp; originals</span>
+          </button>
+
+          <button class="app-card hotstar"
+            data-app="JioHotstar"
+            data-url="https://www.hotstar.com/"
+            type="button">
+            <span class="app-logo">✦</span>
+            <span class="app-name">JioHotstar</span>
+            <span class="app-category">Sports &amp; entertainment</span>
+          </button>
+
+          <button class="app-card sony"
+            data-app="Sony LIV"
+            data-url="https://www.sonyliv.com/"
+            type="button">
+            <span class="app-logo">S</span>
+            <span class="app-name">Sony LIV</span>
+            <span class="app-category">Shows &amp; sports</span>
+          </button>
+
+          <button class="app-card zee"
+            data-app="ZEE5"
+            data-url="https://www.zee5.com/"
+            type="button">
+            <span class="app-logo">Z5</span>
+            <span class="app-name">ZEE5</span>
+            <span class="app-category">TV &amp; movies</span>
+          </button>
+
+          <button class="app-card browser"
+            data-app="Sun NXT"
+            data-url="https://www.sunnxt.com/"
+            type="button">
+            <span class="app-logo">SUN</span>
+            <span class="app-name">Sun NXT</span>
+            <span class="app-category">Tamil entertainment</span>
+          </button>
+
+          <button class="app-card browser"
+            data-app="aha"
+            data-url="https://www.aha.video/"
+            type="button">
+            <span class="app-logo">aha</span>
+            <span class="app-name">aha</span>
+            <span class="app-category">Telugu entertainment</span>
+          </button>
+
+          <button class="app-card browser"
+            data-app="Disney+"
+            data-url="https://www.disneyplus.com/"
+            type="button">
+            <span class="app-logo">D+</span>
+            <span class="app-name">Disney+</span>
+            <span class="app-category">Movies &amp; series</span>
+          </button>
+
+          <button class="app-card spotify"
+            data-app="Spotify"
+            data-url="https://open.spotify.com/"
+            type="button">
+            <span class="app-logo">≋</span>
+            <span class="app-name">Spotify</span>
+            <span class="app-category">Music &amp; podcasts</span>
+          </button>
+
+          <button class="app-card prime"
+            data-app="Prime Music"
+            data-url="https://music.amazon.in/"
+            type="button">
+            <span class="app-logo">♫</span>
+            <span class="app-name">Prime Music</span>
+            <span class="app-category">Music streaming</span>
+          </button>
+
+          <button class="app-card youtube"
+            data-app="YouTube Music"
+            data-url="https://music.youtube.com/"
+            type="button">
+            <span class="app-logo">♫</span>
+            <span class="app-name">YouTube Music</span>
+            <span class="app-category">Music streaming</span>
+          </button>
+
+          <button class="app-card browser"
+            data-app="Browser"
+            data-url="https://www.google.com/"
+            type="button">
+            <span class="app-logo">◎</span>
+            <span class="app-name">Browser</span>
+            <span class="app-category">Browse the web</span>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- Bottom information -->
+      <section class="bottom-grid">
+        <div class="tip-card">
+          <div class="tip-icon">⌨</div>
+          <div>
+            <h3>Made for easy navigation</h3>
+            <p>
+              Use your mouse or keyboard to select apps.
+              Press Enter to open and Escape to return home.
+            </p>
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">▣</div>
+          <div>
+            <h3>Your apps, your screen</h3>
+            <p>
+              Switch to fullscreen for a more immersive
+              entertainment experience.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer id="footer">
+        <span>TV Studio</span>
+        <span>One screen. Endless entertainment.</span>
+      </footer>
+    </main>
+
+    <!-- Toast notifications -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Help dialog -->
+    <div class="modal-backdrop" id="modal" hidden>
+      <section class="modal" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle">
+
+        <button class="modal-close" id="closeModal" type="button"
+          aria-label="Close dialog">✕</button>
+
+        <div class="modal-icon">TV</div>
+        <h2 id="modalTitle">Welcome to TV Studio</h2>
+        <p id="modalText">
+          Select an app to open its website inside TV Studio.
+          Use Back to navigate and Close to return to the home screen.
+        </p>
+
+        <button class="primary-button modal-ok" id="modalOk" type="button">
+          Got it
+        </button>
+      </section>
+    </div>
+
+    <div class="chat-modal-backdrop" id="chatModal" hidden>
+      <section class="chat-panel" role="dialog" aria-modal="true"
+        aria-labelledby="chatTitle">
+
+        <button class="modal-close" id="chatCloseBtn" type="button"
+          aria-label="Close AI chat">✕</button>
+
+        <header class="chat-header">
+          <div class="modal-icon">AI</div>
+          <div>
+            <h2 id="chatTitle">ChatGPT</h2>
+            <p>Ask questions using your OpenAI API key.</p>
+          </div>
+        </header>
+
+        <div class="chat-settings">
+          <label class="chat-field">
+            <span>OpenAI API key</span>
+            <input id="chatApiKey" type="password"
+              placeholder="sk-..." autocomplete="off" />
+          </label>
+
+          <label class="chat-field compact-field">
+            <span>Model</span>
+            <select id="chatModel">
+              <option value="gpt-4o-mini">gpt-4o-mini</option>
+              <option value="gpt-4o">gpt-4o</option>
+              <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+            </select>
+          </label>
+
+          <button class="secondary-button chat-save" id="chatSaveBtn" type="button">
+            Save settings
+          </button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <div class="chat-empty">Ask for a summary, a recipe, or help planning your day.</div>
+        </div>
+
+        <form id="chatForm" class="chat-form">
+          <label class="sr-only" for="chatInput">Message to ChatGPT</label>
+          <textarea id="chatInput" rows="3" maxlength="2000"
+            placeholder="Type your message..."></textarea>
+          <button class="primary-button chat-send" id="chatSendBtn" type="submit">
+            Send
+          </button>
+        </form>
+
+        <div class="chat-status" id="chatStatus">Ready</div>
+      </section>
+    </div>
+
+  </div>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>
